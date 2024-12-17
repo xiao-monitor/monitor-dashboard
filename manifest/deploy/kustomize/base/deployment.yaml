@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,5 +18,13 @@ spec:
       containers:
         - name : main
           image: template-single
+          resources:
+            requests:
+              ephemeral-storage: "2Gi"
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              ephemeral-storage: "4Gi"
+              cpu: "200m"
+              memory: "256Mi"
           imagePullPolicy: Always
-
