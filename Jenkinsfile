@@ -52,9 +52,6 @@ pipeline {
                 expression { BRANCH_NAME == 'master' && !BRANCH_NAME.startsWith('refs/tags/') }
             }
             steps {
-                sh "ls -l ${WORKSPACE}/hack/config.yaml"
-                sh "cat ${WORKSPACE}/hack/config.yaml"
-
                 script {
                     TAG_VERSION = sh(script: "cat ${WORKSPACE}/hack/config.yaml | grep 'version' | awk '{print \$2}'", returnStdout: true).trim()
                 }
@@ -103,12 +100,9 @@ pipeline {
                     def RELEASE_NAME = "RELEASE-${TAG_VERSION}"
                     def CHANGELOG_FILE = "CHANGELOG.md"
 
+                    echo("生成 CHANGELOG...")
                     sh """
-                        echo "获取自上次发布以来的 CHANGELOG..."
                         PREV_TAG=\$(git describe --tags --abbrev=0 HEAD^)
-                        echo "上一个版本: \$PREV_TAG"
-
-                        echo "生成 CHANGELOG..."
                         echo "# DESCRIPTION" > ${CHANGELOG_FILE}
                         echo "\$(git log -1 --pretty=format:'%B') \n" >> ${CHANGELOG_FILE}
                         echo "# CHANGELOG" >> ${CHANGELOG_FILE}
@@ -116,10 +110,6 @@ pipeline {
                         echo "" >> ${CHANGELOG_FILE}
                     """
 
-                    // 查看生成的 CHANGELOG 文件（用于调试）
-                    sh "cat ${CHANGELOG_FILE}"
-
-                    // GitHub CLI 登录状态检查
                     def loginStatus = sh(
                         script: "echo $GITHUB | gh auth login --with-token && gh auth status | grep 'Logged in'",
                         returnStatus: true
@@ -131,7 +121,6 @@ pipeline {
                         echo "✅ GitHub CLI 登录成功"
                     }
 
-                    // 发布到 GitHub Release，并使用生成的 CHANGELOG 文件
                     sh """
                         echo "发布到 GitHub Release..."
                         gh release create ${TAG_VERSION} ${OUTPUT_DIR}/${TAG_VERSION}/** \\
