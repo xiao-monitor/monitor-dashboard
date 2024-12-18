@@ -11,3 +11,13 @@ gfcli:
     build: "-a amd64 -s linux -p temp -ew"
     tagPrefixes:
       - my.image.pub/my-app
+
+  build:
+    name:     "monitor-dashboard"
+    arch:     "all"
+    system:   "linux,darwin,windows,freebsd,openbsd,netbsd"
+    mod:      "none"
+    packSrc:  "resource,manifest"
+    version:  "v1.0.0"
+    path:     "build"
+    extra:    ""
