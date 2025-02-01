@@ -1,8 +1,13 @@
 module monitor-dashboard
 
-go 1.18
+go 1.22.2
 
-require github.com/gogf/gf/v2 v2.7.1
+toolchain go1.23.4
+
+require (
+	github.com/bamboo-services/bamboo-utils v0.1.5
+	github.com/gogf/gf/v2 v2.7.1
+)
 
 require (
 	github.com/BurntSushi/toml v1.3.2 // indirect
@@ -22,7 +27,7 @@ require (
 	go.opentelemetry.io/otel/sdk v1.14.0 // indirect
 	go.opentelemetry.io/otel/trace v1.14.0 // indirect
 	golang.org/x/net v0.24.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/sys v0.21.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

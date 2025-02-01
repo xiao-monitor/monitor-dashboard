@@ -4,8 +4,9 @@
 gfcli:
   gen:
     dao:
-      - link: "mysql:root:12345678@tcp(127.0.0.1:3306)/test"
-        descriptionTag: true
+      - link: "mysql:monitor-dashboard:123456@tcp(127.0.0.1:3306)/monitor-dashboard"
+        jsonCase: "Snake"
+        removePrefix: "xf_"
 
   docker:
     build: "-a amd64 -s linux -p temp -ew"
