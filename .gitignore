@@ -1,0 +1,19 @@
+### System Ignored Files ###
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### IDE ###
+.idea/
+.vscode/
+
+### Go ###
+build/
+
+### Node ###
+node_modules/
+
+### Project ###
+config/config.yaml
+.logs/
