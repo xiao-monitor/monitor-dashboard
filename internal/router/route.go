@@ -22,6 +22,7 @@ func NewRouter() *Router {
 func (r *Router) SetRouter() {
 	api := r.engine.Group("/api/v1")
 	{
+		r.authRoute(api)
 		r.dashboardRoute(api)
 		r.userRoute(api)
 	}

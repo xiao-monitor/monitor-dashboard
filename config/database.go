@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"xiaolfeng/monitor-dashboard/internal/model/entity"
 
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
@@ -26,7 +27,8 @@ func (c *Config) InitDB() {
 		logrus.Panicf("无法连接到数据库: %v", err)
 	}
 
-	// db.AutoMigrate(&other.Config{})
+	// 自动迁移表结构
+	db.AutoMigrate(&entity.UserEntity{})
 
 	c.DB = db
 }
