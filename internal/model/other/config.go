@@ -17,6 +17,6 @@ type Database struct {
 
 // System 系统配置
 type System struct {
-	Port int `yaml:"port"`
+	Port uint16 `yaml:"port"`
 	Mode string `yaml:"mode"`
 }

@@ -1,6 +1,8 @@
 package router
 
 import (
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,6 +25,9 @@ func (r *Router) SetRouter() {
 }
 
 // Run 启动路由
-func (r *Router) Run() {
-	r.engine.Run(":8080")
+func (r *Router) Run(port uint16) {
+	if port == 0 {
+		port = 8888
+	}
+	r.engine.Run(":" + strconv.FormatUint(uint64(port), 10))
 }

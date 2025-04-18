@@ -14,5 +14,5 @@ func main() {
 	// 创建路由
 	router := router.NewRouter()
 	router.SetRouter()
-	router.Run()
+	router.Run(config.Config.System.Port)
 }
