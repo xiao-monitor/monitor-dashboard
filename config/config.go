@@ -3,7 +3,7 @@ package config
 import (
 	"errors"
 	"os"
-	"xiaolfeng/monitor-dashboard/internal/model/other"
+	"xiaolfeng/monitor-dashboard/internal/model/base"
 
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
@@ -12,7 +12,7 @@ import (
 
 type Config struct {
 	DB     *gorm.DB
-	Config *other.Config
+	Config *base.Config
 }
 
 // NewConfig 初始化配置
@@ -28,19 +28,19 @@ func NewConfig() *Config {
 }
 
 // prepareConfig 准备配置
-func prepareConfig() *other.Config {
+func prepareConfig() *base.Config {
 	// 从当前目录解析配置文件
 	yamlFile, err := os.ReadFile("config/config.yaml")
 	if err != nil {
 		yamlFile, err = os.ReadFile("config.yaml")
 		if err != nil {
 			// 如果文件不存在，使用 config.Database 的默认配置
-			defaultConfig := other.Config{
-				System: other.System{
+			defaultConfig := base.Config{
+				System: base.System{
 					Port: 8888,
-					Mode: "debug",
+					Mode: "release",
 				},
-				Database: other.Database{
+				Database: base.Database{
 					Host:     "localhost",
 					Port:     5432,
 					Username: "postgres",
@@ -59,7 +59,7 @@ func prepareConfig() *other.Config {
 			os.Exit(1)
 		}
 	}
-	var config other.Config
+	var config base.Config
 	err = yaml.Unmarshal(yamlFile, &config)
 	if err != nil {
 		logrus.Panicf("无法解析配置文件: %v", err)
@@ -68,7 +68,7 @@ func prepareConfig() *other.Config {
 }
 
 // checkDataIsCorrect 检查配置文件数据是否正确
-func checkDataIsCorrect(config *other.Config) (bool, error) {
+func checkDataIsCorrect(config *base.Config) (bool, error) {
 	if config.System.Port <= 1000 {
 		return false, errors.New("系统端口不能小于1000")
 	}

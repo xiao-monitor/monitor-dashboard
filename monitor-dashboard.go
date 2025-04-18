@@ -2,7 +2,7 @@ package main
 
 import (
 	"xiaolfeng/monitor-dashboard/config"
-	"xiaolfeng/monitor-dashboard/router"
+	"xiaolfeng/monitor-dashboard/internal/router"
 )
 
 func main() {

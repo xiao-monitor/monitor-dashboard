@@ -18,7 +18,7 @@ func (c *Config) InitLogger() {
 	logrus.SetLevel(logrus.DebugLevel)
 
 	// GIN 日志记录输出
-	gin.DisableConsoleColor()
+	gin.ForceConsoleColor()
 	// 创建日志文件(logs/gin/logger.log)
 	if _, err := os.Stat(".logs/gin"); os.IsNotExist(err) {
 		os.MkdirAll(".logs/gin", 0755)

@@ -20,8 +20,11 @@ func NewRouter() *Router {
 
 // SetRouter 设置路由
 func (r *Router) SetRouter() {
-	r.dashboardRoute()
-	r.userRoute()
+	api := r.engine.Group("/api/v1")
+	{
+		r.dashboardRoute(api)
+		r.userRoute(api)
+	}
 }
 
 // Run 启动路由

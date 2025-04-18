@@ -1,5 +1,6 @@
-package other
+package base
 
+// Config 配置
 type Config struct {
 	System   System   `yaml:"system"`
 	Database Database `yaml:"database"`
